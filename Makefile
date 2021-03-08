@@ -11,3 +11,10 @@ all: $(NAME)
 $(NAME):
 	$(stack) build $(package)
 	cp $(executable)/Wolfram-exe ./$(NAME)
+
+clean:
+	$(RM) $(NAME)
+
+re: clean all
+
+.PHONY: all $(NAME) clean re
