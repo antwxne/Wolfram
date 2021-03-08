@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: a10fb3410ecc3c67247ea1875bb53089e518c504c735b72c5038905118bb01a7
+-- hash: b297c71266d1b5acf9835f9256e98284e2ca1f66b5f954d9fa60996bf56edf94
 
 name:           Wolfram
 version:        0.1.0.0
@@ -28,7 +28,6 @@ source-repository head
 library
   exposed-modules:
       CheckingArgs
-      Lib
   other-modules:
       Paths_Wolfram
   hs-source-dirs:
