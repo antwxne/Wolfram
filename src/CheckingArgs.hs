@@ -33,6 +33,14 @@ loadArgs (x:xs:xt) (Conf r s l w m)
   | x == "--move" = loadArgs xt (Conf r s l w (readMaybe xs))
   | otherwise = Nothing
 
+checkArgsValue :: Maybe Conf -> Maybe Conf
+checkArgsValue Nothing = Nothing
+checkArgsValue (Just(Conf r s l w m))
+  | r `notElem` knownRules = Nothing
+  | s < Just 0 = Nothing
+  | w < Just 0 = Nothing
+  | otherwise = (Just(Conf r s l w m))
+
 checkArgs :: Maybe Conf -> Maybe Conf
 checkArgs Nothing = Nothing
 checkArgs (Just(Conf Nothing _ _ _ _)) = Nothing
@@ -40,9 +48,4 @@ checkArgs (Just(Conf _ Nothing _ _ _)) = Nothing
 checkArgs (Just(Conf _ _ Nothing _ _)) = Nothing
 checkArgs (Just(Conf _ _ _ Nothing _)) = Nothing
 checkArgs (Just(Conf _ _ _ _ Nothing)) = Nothing
-checkArgs (Just(Conf r s l w m))
-  | r `notElem` knownRules = Nothing
-  | s < Just 0 = Nothing
-  | l < Just 0 = Nothing
-  | w < Just 0 = Nothing
-  | otherwise = (Just(Conf r s l w m))
+checkArgs (Just(Conf r s l w m)) = checkArgsValue (Just(Conf r s l w m))
