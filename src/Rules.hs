@@ -22,26 +22,19 @@ createChar rule shif
   | ((rule `shiftR` shif) .&. 1) == 1 = "*"
   | otherwise = " "
 
-
 firstChar :: Int -> String -> String
-firstChar rule (' ':[]) = createChar rule 0
-firstChar rule ('*':[]) = createChar rule 1
 firstChar rule (' ':' ':_) = createChar rule 0
 firstChar rule (' ':'*':_) = createChar rule 1
 firstChar rule ('*':' ':_) = createChar rule 2
 firstChar rule ('*':'*':_) = createChar rule 3
 
-lastChar :: Int -> String -> String
-lastChar rule (' ':' ':[]) = createChar rule 0
-lastChar rule (' ':'*':[]) = createChar rule 2
-lastChar rule ('*':' ':[]) = createChar rule 4
-lastChar rule ('*':'*':[]) = createChar rule 6
-lastChar rule x = lastChar rule (tail x)
-
 createNextLine :: Int -> String -> String
 createNextLine _ [] = []
 createNextLine _ (_:[]) = []
-createNextLine _ (_:_:[]) = []
+createNextLine rule (' ':' ':[]) = createChar rule 0
+createNextLine rule (' ':'*':[]) = createChar rule 1
+createNextLine rule ('*':' ':[]) = createChar rule 2
+createNextLine rule ('*':'*':[]) = createChar rule 3
 createNextLine rule x = (createChar rule (getBinary x))
   ++ createNextLine rule (tail x)
 
@@ -49,10 +42,10 @@ displayRules :: Int -> Int -> String -> IO()
 displayRules 0 _ _ = exitWith(ExitSuccess)
 displayRules line rule prev =  putStrLn(prev) >>
   displayRules (line - 1) rule ((firstChar rule prev)
-  ++ (createNextLine rule prev) ++ (lastChar rule prev)) 
+  ++ (createNextLine rule prev))-- ++ (lastChar rule prev)) 
 
 startGen :: Int -> Int -> String -> String
 startGen 0 _ prev = prev
 startGen line rule prev = startGen (line - 1) rule
   ((firstChar rule prev)
-  ++ (createNextLine rule prev) ++ (lastChar rule prev))
+  ++ (createNextLine rule prev))-- ++ (lastChar rule prev))
