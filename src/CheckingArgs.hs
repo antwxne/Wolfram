@@ -28,7 +28,7 @@ loadArgs (_:[]) _ = Nothing
 loadArgs (x:xs:xt) (Conf r s l w m)
   | x == "--rule" = loadArgs xt (Conf (readMaybe xs) s l w m)
   | x == "--start" = loadArgs xt (Conf r (readMaybe xs) l w m)
-  | x == "--line" = loadArgs xt (Conf r s (readMaybe xs) w m)
+  | x == "--lines" = loadArgs xt (Conf r s (readMaybe xs) w m)
   | x == "--window" = loadArgs xt (Conf r s l (readMaybe xs) m)
   | x == "--move" = loadArgs xt (Conf r s l w (readMaybe xs))
   | otherwise = Nothing
