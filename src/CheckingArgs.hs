@@ -25,13 +25,17 @@ knownRules = [Just 30, Just 90, Just 110]
 loadArgs :: [String] -> Conf -> Maybe Conf
 loadArgs [] flags = Just flags
 loadArgs (_:[]) _ = Nothing
-loadArgs (x:xs:xt) (Conf r s l w m)
-  | x == "--rule" = loadArgs xt (Conf (readMaybe xs) s l w m)
-  | x == "--start" = loadArgs xt (Conf r (readMaybe xs) l w m)
-  | x == "--lines" = loadArgs xt (Conf r s (readMaybe xs) w m)
-  | x == "--window" = loadArgs xt (Conf r s l (readMaybe xs) m)
-  | x == "--move" = loadArgs xt (Conf r s l w (readMaybe xs))
-  | otherwise = Nothing
+loadArgs ("--rule":xs:xt) (Conf _ s l w m) = loadArgs xt
+  (Conf (readMaybe xs) s l w m)
+loadArgs ("--start":xs:xt) (Conf r _ l w m) = loadArgs xt
+  (Conf r (readMaybe xs) l w m)
+loadArgs ("--lines":xs:xt) (Conf r s _ w m) = loadArgs xt
+  (Conf r s (readMaybe xs) w m)
+loadArgs ("--window":xs:xt) (Conf r s l _ m) = loadArgs xt
+  (Conf r s l (readMaybe xs) m)
+loadArgs ("--move":xs:xt) (Conf r s l w _) = loadArgs xt
+  (Conf r s l w (readMaybe xs))
+loadArgs _ _ = Nothing
 
 checkArgsValue :: Maybe Conf -> Maybe Conf
 checkArgsValue Nothing = Nothing

@@ -38,14 +38,13 @@ createNextLine rule ('*':'*':[]) = createChar rule 3
 createNextLine rule x = (createChar rule (getBinary x))
   ++ createNextLine rule (tail x)
 
-displayRules :: Int -> Int -> String -> IO()
-displayRules 0 _ _ = exitWith(ExitSuccess)
-displayRules line rule prev =  putStrLn(prev) >>
-  displayRules (line - 1) rule ((firstChar rule prev)
-  ++ (createNextLine rule prev))-- ++ (lastChar rule prev)) 
+displayRules :: Int -> Int -> Int -> Int -> String -> IO()
+displayRules 0 _ _ _ _= exitWith(ExitSuccess)
+displayRules line rule skip w prev =  putStrLn(take w (drop skip prev)) >>
+  displayRules (line - 1) rule (skip + 1) w ("  "
+  ++ (createNextLine rule prev) ++ "  ") 
 
 startGen :: Int -> Int -> String -> String
 startGen 0 _ prev = prev
 startGen line rule prev = startGen (line - 1) rule
-  ((firstChar rule prev)
-  ++ (createNextLine rule prev))-- ++ (lastChar rule prev))
+  ("  " ++ (createNextLine rule prev) ++ "  ")
