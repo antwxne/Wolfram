@@ -42,9 +42,9 @@ displayRules :: Int -> Int -> Int -> Int -> String -> IO()
 displayRules 0 _ _ _ _= exitWith(ExitSuccess)
 displayRules line rule skip w prev =  putStrLn(take w (drop skip prev)) >>
   displayRules (line - 1) rule (skip + 1) w ("  "
-  ++ (createNextLine rule prev) ++ "  ") 
+  ++ (createNextLine rule prev) ++ " ") 
 
 startGen :: Int -> Int -> String -> String
 startGen 0 _ prev = prev
 startGen line rule prev = startGen (line - 1) rule
-  ("  " ++ (createNextLine rule prev) ++ "  ")
+  ("  " ++ (createNextLine rule prev) ++ " ")
