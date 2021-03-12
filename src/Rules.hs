@@ -22,12 +22,6 @@ createChar rule shif
   | ((rule `shiftR` shif) .&. 1) == 1 = "*"
   | otherwise = " "
 
-firstChar :: Int -> String -> String
-firstChar rule (' ':' ':_) = createChar rule 0
-firstChar rule (' ':'*':_) = createChar rule 1
-firstChar rule ('*':' ':_) = createChar rule 2
-firstChar rule ('*':'*':_) = createChar rule 3
-
 createNextLine :: Int -> String -> String
 createNextLine _ [] = []
 createNextLine _ (_:[]) = []
