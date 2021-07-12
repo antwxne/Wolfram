@@ -49,15 +49,15 @@ Linux:
 make
 ./wolfram --rule R [ [--start S][--lines L][--window W][--move M] ]
 ```
-* -–rule : the ruleset to use (no default value, mandatory)
-* -–start : the generation number at which to start the display. The default value is 0.
-* -–lines : the number of lines to display. When omitted, the program never stops.
-* -–window : the number of cells to display on each line (line width). If even,
+* --rule : the ruleset to use (no default value, mandatory)
+* --start : the generation number at which to start the display. The default value is 0.
+* --lines : the number of lines to display. When omitted, the program never stops.
+* --window : the number of cells to display on each line (line width). If even,
 the central cell is displayed in the next cell on the right. The default value is 80.
-* -–move : a translation to apply on the window. If negative, the window is translated to the left.
+* --move : a translation to apply on the window. If negative, the window is translated to the left.
 If positive, it’s translated to the right.
 
-##Bonus
+## Bonus
 
 Rules 0 to 255.
 ```shell
@@ -71,9 +71,5 @@ make
 - Antoine Desruet [![github-link][github-logo]](https://github.com/antwxne)
 
 <!-- Markdown link & img definition's -->
-
-[vsc-installation-doc]: https://code.visualstudio.com/docs/editor/command-line
-
-[cmake-installation-doc]: https://cmake.org/install/
 
 [Github-logo]: https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
