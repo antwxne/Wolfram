@@ -12,14 +12,6 @@ But it was easier to implement all rules with a generic method.
   </a>
 </p>
 
-This project was make in Haskell.
-
-<p align="center">
-  <a href="https://www.haskell.org/">
-    <img src=".github/readme_resources/haskell_logo.png" alt="Haskell logo">
-  </a>
-</p>
-
 <h2>Previews</h2>
 <details>
     <summary>Rule 30</summary>
